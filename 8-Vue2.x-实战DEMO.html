@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Vue</title>
+		<style type="text/css">
+			#bag{
+				width: 200px;
+				height: 500px;
+				margin: 0 auto;
+				background: url(img/bag.png) center no-repeat;
+				background-size:80%;
+			}
+			#bag.burst{
+				background-image: url(img/bag-burst.png);
+			}
+			#healhty{
+				width: 200px;
+				margin: 0 auto;
+				border: 2px solid black;
+			}
+			#healhty div{
+				height: 20px;
+				background: crimson;
+			}
+			#controls{
+				text-align: center;
+				margin: 20px auto;
+			}
+		</style>
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			<div id="bag" :class="{burst:ended}"></div>
+			<div id="healhty">
+				<div :style="{width:healthy + '%'}"></div>
+			</div>
+			<div id="controls">
+				<button @click="bunth" v-show="!ended">bunth</button>
+				<button @click="restart">restart</button>
+			</div>
+		</div>
+		
+		
+		<script type="text/javascript">
+			new Vue({
+				el:'#app',
+				data:{
+					healthy:100,
+					ended:false
+				},
+				methods:{
+					bunth:function(){
+						this.healthy -= 10;
+						if(this.healthy <= 0){
+							this.ended = true;
+						}
+					},
+					restart:function(){
+						this.healthy = 100;
+						this.ended = false;
+					}
+				}
+			})
+		</script>
+	</body>
+</html>

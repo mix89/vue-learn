@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Vue</title>
+		<style type="text/css">
+			.complated{
+				text-decoration: line-through;
+			}
+		</style>
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			<task-app :list="tasks"></task-app>
+		</div>
+		
+		<template id="task-template">
+			<div>
+				<ul>
+					<li 
+						@click="toggleTasks(task)" 
+						:class="{'complated':task.complated}" 
+						v-for='task in list'
+					>
+						{{task.body}}
+						<span @click="deleteTask(task)">x</span>
+					</li>
+				</ul>
+			</div>
+		</template>
+		
+		
+		
+		<script type="text/javascript">
+			Vue.component('task-app',{
+				template:'#task-template',
+				props:['list'],
+				methods:{
+					toggleTasks:function(me){
+						me.complated = !me.complated;
+					},
+					deleteTask:function(task){
+						this.list.$remove(task);
+					}
+				}
+			})
+			new Vue({
+				el:'#app',
+				data:{
+					tasks:[
+					{body:'我喜欢吃苹果',complated:false},
+					{body:'我喜欢吃菠萝',complated:true},
+					{body:'我喜欢吃榴莲',complated:false}
+					]
+				}
+			})
+		</script>
+	</body>
+</html>

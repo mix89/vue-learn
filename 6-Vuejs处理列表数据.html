@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Vue</title>
+		<style type="text/css">
+			.complated{
+				text-decoration: line-through;
+			}
+		</style>
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			<ul>
+				<li @click="toggleTasks(task)" :class="{'complated':task.complated}" v-for='task in tasks'>{{task.body}}
+					<ul>
+						<li v-for="addr in task.address"> {{addr}}</li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+		
+		
+		
+		<script type="text/javascript">
+			new Vue({
+				el:'#app',
+				data:{
+					tasks:[
+					{body:'我喜欢吃苹果',complated:false, address:['广东', '福建']},
+					{body:'我喜欢吃菠萝',complated:true, address:['山东', '福建', '湖南']},
+					{body:'我喜欢吃榴莲',complated:false, address:['江西', '上海']}
+					]
+				},
+				methods:{
+					toggleTasks:function(me){
+						me.complated = !me.complated;
+					}
+				}
+			})
+		</script>
+	</body>
+</html>
